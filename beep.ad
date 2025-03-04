@@ -1,0 +1,223 @@
+= Rapport de Migration de Beep vers une Architecture Microservices
+:toc:
+:toc-title: Table des Matières
+
+== Introduction
+
+Dans le contexte actuel de transformation numérique, les entreprises sont confrontées à des défis croissants en matière de scalabilité, de flexibilité et de rapidité de mise sur le marché. Traditionnellement, les applications logicielles étaient développées sous forme de monolithes, où toutes les fonctionnalités sont intégrées dans une seule base de code. Bien que cette approche ait ses avantages, notamment en termes de simplicité initiale de développement et de déploiement, elle présente des limitations significatives à mesure que l'application évolue.
+
+Le passage d'une architecture monolithique à une architecture microservices représente une réponse stratégique à ces limitations. Les microservices permettent de décomposer une application en plusieurs services indépendants, chacun responsable d'une fonctionnalité spécifique. Cette approche offre plusieurs avantages clés :
+
+Scalabilité : Chaque microservice peut être mis à l'échelle indépendamment en fonction des besoins spécifiques, optimisant ainsi l'utilisation des ressources.
+
+Flexibilité : Les équipes de développement peuvent travailler sur différents services en parallèle, utilisant les technologies les mieux adaptées à chaque cas d'utilisation, ce qui accélère le développement et l'innovation.
+
+Résilience : Une défaillance dans un microservice n'affecte pas nécessairement l'ensemble du système, améliorant ainsi la robustesse globale de l'application.
+
+Déploiement Continu : Les microservices facilitent l'adoption de pratiques DevOps, permettant des déploiements plus fréquents et plus sûrs, et réduisant le temps de mise sur le marché des nouvelles fonctionnalités.
+
+Ce rapport vise à explorer les motivations, les défis et les bénéfices associés à la transition d'une architecture monolithique vers une architecture microservices. Nous examinerons les technologies et les outils utilisés pour faciliter cette transition, ainsi que les meilleures pratiques pour assurer une migration réussie. Enfin, nous évaluerons l'impact de cette transformation sur les performances, la maintenance et l'évolutivité de l'application.
+
+Dans ce document nous décrirons donc la migration de notre application, Beep, d'une architecture monolithique vers une architecture microservices.
+
+== Découpage Fonctionnel et Microservices
+
+### Redéfinition des Fonctionnalités
+
+- En tant qu'**utilisateur invité**, je veux **m'inscrire et me connecter** afin de **participer aux discussions**.
+- En tant qu'**utilisateur enregistré**, je veux **créer un serveur** afin de **gérer ma propre communauté**.
+- En tant qu'**utilisateur enregistré**, je veux **personnaliser mon profil** afin de **refléter mon identité et mes intérêts**.
+- En tant qu'**utilisateur enregistré**, je veux **voir l'état de présence des autres membres d'un serveur ou de mes amis** afin de **savoir qui est en ligne et disponible pour discuter**.
+- En tant qu'**utilisateur enregistré**, je veux **rejoindre un serveur** afin de **interagir avec d'autres utilisateurs**.
+- En tant qu'**administrateur de serveur**, je veux **créer des channels de discussion** afin de **organiser les échanges**.
+- En tant qu'**administrateur de serveur**, je veux **gérer les rôles et permissions des utilisateurs** afin de **contrôler les accès aux fonctionnalités**.
+- En tant qu'**utilisateur**, je veux **envoyer des messages texte et vocaux** afin de **communiquer avec les autres membres**.
+- En tant qu'**utilisateur**, je veux **partager des fichiers et des images** afin de **échanger du contenu avec ma communauté**.
+- En tant qu'**utilisateur**, je veux **recevoir des notifications** afin de **être informé des nouveaux messages et événements**.
+- En tant qu'**administrateur de serveur**, je veux **modérer le contenu** afin de **garantir le respect des règles de la communauté**.
+- En tant qu'**utilisateur**, je veux **effectuer des recherches dans les messages** afin de **retrouver rapidement une information**.
+- En tant qu'**utilisateur**, je veux **participer à des appels vidéo ou audio** afin de **communiquer en temps réel avec d'autres membres**.
+
+### Quartiers Fonctionnels
+
+- **Authentification & Gestion des Utilisateurs**
+  - Inscription, Connexion, Gestion des Profils
+  - Gestion des rôles et permissions
+  
+- **Gestion des Serveurs et channels**
+  - Création et gestion des serveurs
+  - Création et gestion des channels
+  - Modération des discussions
+  
+- **Messagerie et Communication**
+  - Envoi de messages texte et vocaux
+  - Partage de fichiers et médias
+  - Notifications en temps réel
+
+- **Recherche & Indexation**
+  - Moteur de recherche pour messages et fichiers
+  
+### Schéma d'Architecture Microservices
+
+.Diagramme d'Architecture
+image::diagramme/Architecture-Diagram.drawio.png[]
+
+== Authentification avec OIDC
+
+### Plan d'Intégration OIDC :
+L'authentification des utilisateurs repose sur **Keycloak**, un fournisseur OIDC qui gère les différentes méthodes de connexion.  
+Les types d'authentification pris en charge sont :
+- **Vanilla** : Création et connexion avec un compte Beep (email/mot de passe).
+- **Polytech** : Authentification via le LDAP de Polytech en utilisant Keycloak comme passerelle OIDC.
+- **Google** : Connexion via Google OAuth, avec possibilité d'association avec un compte Beep existant.
+
+L'objectif est d'assurer une authentification centralisée, sécurisée et extensible.
+
+---
+
+### Déploiement de Keycloak :
+Le schéma suivant illustre le déploiement des composants impliqués dans l'authentification OIDC :
+
+#### **Composants :**
+- **Frontend** : Interface utilisateur (React).
+- **Backend** : API Beep qui communique avec Keycloak et la base de données.
+- **Keycloak** : Gère l'authentification OIDC et communique avec les fournisseurs externes.
+- **Database** : Stocke les informations des utilisateurs (hors identifiants).
+- **Polytech LDAP** : Service externe pour l'authentification des étudiants et enseignants de Polytech.
+- **Google OAuth** : Service externe pour l'authentification Google.
+
+.Diagramme de Déploiement
+image::diagramme/deployment.drawio.png[]
+
+#### **Flux de communication :**
+1. L'utilisateur initie une connexion ou une inscription via le **Frontend**.
+2. Le **Backend** redirige vers **Keycloak** pour authentification.
+3. **Keycloak** traite l'authentification selon le fournisseur choisi :
+   - Directement pour un compte Vanilla.
+   - Via **Polytech LDAP** pour une connexion universitaire.
+   - Via **Google OAuth** pour une connexion Google.
+4. Une fois authentifié, **Keycloak** retourne un **token JWT** au **Backend**.
+5. Le **Backend** vérifie l'identité et accorde une session utilisateur.
+
+.Flux de Communication
+image::diagramme/flux-comunication.drawio.png[]
+---
+
+### Flux d'Authentification :
+Ces diagrammes illustrent les différentes étapes du processus d'authentification selon le type de compte.
+
+#### **1. Création de compte utilisateur :**
+- **Vanilla** : L'utilisateur fournit un email et un mot de passe, Keycloak gère la création et stocke les données dans la base de données.
+- **Polytech** : Redirection vers **Polytech LDAP** via **Keycloak** pour validation des identifiants.
+- **Google** : Redirection vers **Google OAuth**, qui renvoie un jeton validé par **Keycloak**.
+
+#### **2. Connexion utilisateur :**
+- **Vanilla** : L'utilisateur soumet ses identifiants, qui sont validés par **Keycloak**.
+- **Polytech** : Redirection vers **Polytech LDAP**, qui valide et retourne un jeton à **Keycloak**.
+
+#### **3. Association d'un compte Google :**
+1. L'utilisateur connecté initie une liaison avec son compte Google.
+2. Redirection vers **Google OAuth** pour validation.
+3. Retour du jeton à **Keycloak**.
+4. Mise à jour du compte Beep pour inclure l'identité Google.
+
+Ces éléments garantissent une gestion flexible et sécurisée de l'authentification pour Beep.
+
+.Diagrammes de Séquence
+image::diagramme/sequence-diagrame-TDA.drawio.png[]
+
+== Communication Inter-Microservices
+
+### Stratégie de Communication :
+
+Pour une application de messagerie en temps réel comme Beep, l'architecture doit prioriser la faible latence, la haute disponibilité et la scalabilité.
+
+#### **1. Service d'Authentification:**
+
+**APIs REST/gRPC :** Les APIs REST sont utilisées pour leur simplicité et leur compatibilité avec les navigateurs web, facilitant ainsi l'intégration avec des applications front-end. gRPC est utilisé pour la communication inter-services en raison de sa performance et de sa capacité à gérer des appels de procédure distante de manière efficace.
+
+**Kafka :** Kafka est utilisé pour la consommation d'événements, permettant une architecture événementielle où les changements d'état (comme les connexions ou les déconnexions) peuvent être propagés de manière asynchrone et fiable à d'autres services.
+
+#### **2. Service de Messages:**
+
+**gRPC :** gRPC est choisi pour sa performance et sa capacité à gérer des communications bidirectionnelles, ce qui est crucial pour les opérations CRUD sur les messages où la latence doit être minimale.
+
+**Redis :** Redis est utilisé pour le cache afin de réduire la latence des opérations de lecture fréquentes, améliorant ainsi la réactivité de l'application.
+
+#### **3. Service de Présence:**
+
+**WebSockets :** Les WebSockets permettent une communication bidirectionnelle en temps réel entre le client et le serveur, essentielle pour maintenir l'état de présence des utilisateurs à jour en temps réel.
+
+**Redis Pub/Sub :** Redis Pub/Sub est utilisé pour la diffusion d'états de présence entre les instances du service, assurant que toutes les instances ont une vue cohérente de l'état des utilisateurs.
+
+#### **4. Service de Notifications:**
+
+**Kafka Streams :** Kafka Streams permet de traiter les flux de notifications de manière évolutive et fiable, garantissant que chaque notification est traitée exactement une fois.
+
+**WebSocket/Push :** Les WebSockets et les notifications push sont utilisés pour envoyer des notifications en temps réel aux utilisateurs, que ce soit sur le web ou sur des appareils mobiles.
+
+#### **5. Service de Médias:**
+
+**API REST :** Une API REST est utilisée pour les uploads de médias en raison de sa simplicité et de sa compatibilité avec les navigateurs web, facilitant ainsi l'intégration avec les interfaces utilisateur.
+
+**RabbitMQ :** RabbitMQ est utilisé pour le traitement asynchrone des médias, permettant de découpler le traitement des images et des vidéos de l'upload initial, ce qui améliore la réactivité de l'application.
+
+#### **6. Service de Serveurs/Channel:**
+
+**gRPC et REST :** gRPC est utilisé pour la communication inter-services en raison de sa performance, tandis que REST est utilisé pour les interactions avec les clients en raison de sa simplicité et de sa compatibilité.
+
+**Kafka :** Kafka est utilisé pour la propagation des événements liés aux serveurs et aux canaux, permettant une architecture événementielle où les changements peuvent être consommés de manière asynchrone par d'autres services.
+
+### Diagramme de Séquence :
+- Exemple de communication entre services.
+
+== Système d'Autorisation
+
+### Architecture du Service d'Autorisation :
+- Gestion des permissions par serveur, catégorie et canal.
+- Permissions globales pour les administrateurs.
+
+### Diagrammes de Séquence :
+- Exemple de contrôle d'accès basé sur les rôles.
+
+== Journalisation et Traçabilité
+
+### Plan d'Observabilité :
+- Utilisation de la journalisation et de la traçabilité centralisées.
+- Définition des logs de sécurité.
+
+### Diagrammes de Déploiement et de Séquence :
+(À créer sur Draw.io)
+
+== Prêt pour la Production
+
+### Sujets Couverts :
+- Sécurité des données et sauvegardes.
+- Observabilité des services.
+- Stratégies de haute disponibilité.
+
+### Diagramme Cible :
+(À créer sur Draw.io)
+
+== Sécurité de l'Infrastructure
+
+### Authentification Mobile :
+- Définition du processus d'authentification mobile.
+
+### Architecture de Sécurité :
+- Séparation DMZ, cryptographie et protocoles utilisés.
+
+== Moteur de Recherche
+
+### Proposition Fonctionnelle :
+- Mise en place d'une recherche en texte intégral.
+
+### Maquette UI :
+(À créer sur Draw.io)
+
+### Diagramme de Séquence :
+- Flux de requête de recherche.
+
+== Conclusion
+
+Résumé des décisions architecturales clés et prochaines étapes.

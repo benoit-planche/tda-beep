@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.omg.org/spec/UML/20131001">
+  <packagedElement xmi:type="uml:Package" name="MessageAppArchitecture">
+    
+    <!-- Communication et Temps Réel -->
+    <packagedElement xmi:type="uml:Component" name="CommunicationTempsReel">
+      <ownedAttribute xmi:type="uml:Property" name="WebSocketService" type="WebSocketService"/>
+      <ownedAttribute xmi:type="uml:Property" name="APIGateway" type="APIGateway"/>
+      <ownedAttribute xmi:type="uml:Property" name="PresenceService" type="PresenceService"/>
+      <ownedAttribute xmi:type="uml:Property" name="NotificationService" type="NotificationService"/>
+    </packagedElement>
+    
+    <!-- Services Sous-jacents -->
+    <packagedElement xmi:type="uml:Component" name="WebSocketService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionConnexions"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="DiffusionTempsReel"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="APIGateway">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="Routage"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="Authentification"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="PresenceService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="EtatEnLigne"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="StatutsUtilisateurs"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="NotificationService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="PushNotifications"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="NotificationsTempsReel"/>
+    </packagedElement>
+    
+    <!-- Gestion des Utilisateurs et Communautés -->
+    <packagedElement xmi:type="uml:Component" name="GestionUtilisateurs">
+      <ownedAttribute xmi:type="uml:Property" name="AuthService" type="AuthService"/>
+      <ownedAttribute xmi:type="uml:Property" name="UserProfileService" type="UserProfileService"/>
+      <ownedAttribute xmi:type="uml:Property" name="ServersChannelsService" type="ServersChannelsService"/>
+      <ownedAttribute xmi:type="uml:Property" name="SocialService" type="SocialService"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="AuthService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="Inscription"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="Connexion"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionRoles"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="UserProfileService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="InformationsUtilisateur"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="RelationsUtilisateur"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="ParametresUtilisateur"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="ServersChannelsService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="CreationServeurs"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionServeurs"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="PermissionsServeurs"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="SocialService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionAmis"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionGroupes"/>
+    </packagedElement>
+    
+    <!-- Gestion du Contenu -->
+    <packagedElement xmi:type="uml:Component" name="GestionContenu">
+      <ownedAttribute xmi:type="uml:Property" name="MessageService" type="MessageService"/>
+      <ownedAttribute xmi:type="uml:Property" name="MediaService" type="MediaService"/>
+      <ownedAttribute xmi:type="uml:Property" name="FileService" type="FileService"/>
+      <ownedAttribute xmi:type="uml:Property" name="SearchService" type="SearchService"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="MessageService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionMessages"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="MediaService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionMedias"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="FileService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="GestionFichiers"/>
+    </packagedElement>
+    
+    <packagedElement xmi:type="uml:Component" name="SearchService">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" name="RechercheContenu"/>
+    </packagedElement>
+    
+    <!-- Infrastructure -->
+    <packagedElement xmi:type="uml:Component" name="Infrastructure">
+      <ownedAttribute xmi:type="uml:Property" name="Conteneurisation" type="DockerKubernetes"/>
+      <ownedAttribute xmi:type="uml:Property" name="MessageBroker" type="KafkaRabbitMQ"/>
+      <ownedAttribute xmi:type="uml:Property" name="BaseDeDonnees" type="PostgreSQLCassandraRedis"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
