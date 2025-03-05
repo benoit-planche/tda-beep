@@ -225,27 +225,22 @@ L'implémentation technique repose sur une approche **microservices** avec un **
 ### **4.4 Diagrammes de Séquence**  
 Les diagrammes suivants illustrent le fonctionnement du système dans les cas d'usage principaux.  
 
-#### **4.4.1 Création d'un Serveur et Attribution des Permissions**  
+#### **4.4.1 Création d'un Channel**  
 **Acteurs** : Utilisateur, Backend, Service d'Autorisation, Base de données.  
-1. L'utilisateur crée un serveur via l'interface.  
+1. L'utilisateur crée un channel via l'interface.  
 2. Le backend contacte le service d'autorisation pour initialiser les permissions.  
 3. Les permissions sont stockées en base et mises en cache.  
+
+.Diagramme de Séquence : Gestion des permission lors de la création d'un Channel
+image::diagramme/sequence-permission-creation-channel.drawio.png[]
 
 #### **4.4.2 Ajout d'un Utilisateur à un Serveur avec un Rôle Spécifique**  
 **Acteurs** : Administrateur du serveur, Backend, Service d'Autorisation.  
 1. L'administrateur attribue un rôle (ex : modérateur) à un utilisateur.  
 2. Le service d'autorisation met à jour les permissions en base et en cache.  
 
-#### **4.4.3 Accès à un Channel avec Vérification des Permissions**  
-**Acteurs** : Utilisateur, Frontend, Backend, Service d'Autorisation.  
-1. L'utilisateur tente d'accéder à un channel.  
-2. Le backend interroge le service d'autorisation pour vérifier les permissions.  
-3. Si autorisé, le contenu du channel est chargé.  
-
-#### **4.4.4 Attribution de Permissions Globales à un Administrateur**  
-**Acteurs** : Super Administrateur, Service d'Autorisation.  
-1. Un super admin élève un utilisateur au rang d'administrateur global.  
-2. Les permissions globales sont mises à jour dans le service d'autorisation.  
+.Diagramme de Séquence : Attribution d'un Rôle à un Utilisateur
+image::diagramme/sequence-permission-attribution-role.drawio.png[]
 
 #### Architecture du Service d'Autorisation :
 - Gestion des permissions par serveur, catégorie et canal.
