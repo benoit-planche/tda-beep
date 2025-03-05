@@ -136,8 +136,6 @@ Pour une application de messagerie en temps réel comme Beep, l'architecture doi
 
 **APIs REST/gRPC :** Les APIs REST sont utilisées pour leur simplicité et leur compatibilité avec les navigateurs web, facilitant ainsi l'intégration avec des applications front-end. gRPC est utilisé pour la communication inter-services en raison de sa performance et de sa capacité à gérer des appels de procédure distante de manière efficace.
 
-**Kafka :** Kafka est utilisé pour la consommation d'événements, permettant une architecture événementielle où les changements d'état (comme les connexions ou les déconnexions) peuvent être propagés de manière asynchrone et fiable à d'autres services.
-
 #### **2. Service de Messages:**
 
 **gRPC :** gRPC est choisi pour sa performance et sa capacité à gérer des communications bidirectionnelles, ce qui est crucial pour les opérations CRUD sur les messages où la latence doit être minimale.
@@ -152,8 +150,6 @@ Pour une application de messagerie en temps réel comme Beep, l'architecture doi
 
 #### **4. Service de Notifications:**
 
-**Kafka Streams :** Kafka Streams permet de traiter les flux de notifications de manière évolutive et fiable, garantissant que chaque notification est traitée exactement une fois.
-
 **WebSocket/Push :** Les WebSockets et les notifications push sont utilisés pour envoyer des notifications en temps réel aux utilisateurs, que ce soit sur le web ou sur des appareils mobiles.
 
 #### **5. Service de Médias:**
@@ -166,10 +162,12 @@ Pour une application de messagerie en temps réel comme Beep, l'architecture doi
 
 **gRPC et REST :** gRPC est utilisé pour la communication inter-services en raison de sa performance, tandis que REST est utilisé pour les interactions avec les clients en raison de sa simplicité et de sa compatibilité.
 
-**Kafka :** Kafka est utilisé pour la propagation des événements liés aux serveurs et aux canaux, permettant une architecture événementielle où les changements peuvent être consommés de manière asynchrone par d'autres services.
-
 ### Diagramme de Séquence :
-- Exemple de communication entre services.
+
+Voici le diagramme de séquence résumant les interactions entre les différents microservices lors de l'envoi d'un message par un utilisateur.
+
+.Diagramme de Séquence de Communication
+image::diagramme/sequence-communication-inter-microservice.drawio.png[]
 
 == Système d'Autorisation
 
