@@ -20,9 +20,9 @@ Ce rapport vise à explorer les motivations, les défis et les bénéfices assoc
 
 Dans ce document nous décrirons donc la migration de notre application, Beep, d'une architecture monolithique vers une architecture microservices.
 
-== Découpage Fonctionnel et Microservices
+== 1. Découpage Fonctionnel et Microservices
 
-### Redéfinition des Fonctionnalités
+### 1.1 Redéfinition des Fonctionnalités
 
 - En tant qu'**utilisateur invité**, je veux **m'inscrire et me connecter** afin de **participer aux discussions**.
 - En tant qu'**utilisateur enregistré**, je veux **créer un serveur** afin de **gérer ma propre communauté**.
@@ -38,7 +38,7 @@ Dans ce document nous décrirons donc la migration de notre application, Beep, d
 - En tant qu'**utilisateur**, je veux **effectuer des recherches dans les messages** afin de **retrouver rapidement une information**.
 - En tant qu'**utilisateur**, je veux **participer à des appels vidéo ou audio** afin de **communiquer en temps réel avec d'autres membres**.
 
-### Quartiers Fonctionnels
+### 1.2 Quartiers Fonctionnels
 
 - **Authentification & Gestion des Utilisateurs**
   - Inscription, Connexion, Gestion des Profils
@@ -57,14 +57,14 @@ Dans ce document nous décrirons donc la migration de notre application, Beep, d
 - **Recherche & Indexation**
   - Moteur de recherche pour messages et fichiers
   
-### Schéma d'Architecture Microservices
+### 1.3 Schéma d'Architecture Microservices
 
 .Diagramme d'Architecture
 image::diagramme/Architecture-Diagram.drawio.png[]
 
-== Authentification avec OIDC
+== 2. Authentification avec OIDC
 
-### Plan d'Intégration OIDC :
+### 2.1 Plan d'Intégration OIDC :
 L'authentification des utilisateurs repose sur **Keycloak**, un fournisseur OIDC qui gère les différentes méthodes de connexion.  
 Les types d'authentification pris en charge sont :
 - **Vanilla** : Création et connexion avec un compte Beep (email/mot de passe).
@@ -75,10 +75,10 @@ L'objectif est d'assurer une authentification centralisée, sécurisée et exten
 
 ---
 
-### Déploiement de Keycloak :
+### 2.2 Déploiement de Keycloak :
 Le schéma suivant illustre le déploiement des composants impliqués dans l'authentification OIDC :
 
-#### **Composants :**
+#### 2.2.1 **Composants :**
 - **Frontend** : Interface utilisateur (React).
 - **Backend** : API Beep qui communique avec Keycloak et la base de données.
 - **Keycloak** : Gère l'authentification OIDC et communique avec les fournisseurs externes.
@@ -89,7 +89,7 @@ Le schéma suivant illustre le déploiement des composants impliqués dans l'aut
 .Diagramme de Déploiement
 image::diagramme/deployment.drawio.png[]
 
-#### **Flux de communication :**
+#### 2.2.1 **Flux de communication :**
 1. L'utilisateur initie une connexion ou une inscription via le **Frontend**.
 2. Le **Backend** redirige vers **Keycloak** pour authentification.
 3. **Keycloak** traite l'authentification selon le fournisseur choisi :
@@ -103,19 +103,19 @@ image::diagramme/deployment.drawio.png[]
 image::diagramme/flux-comunication.drawio.png[]
 ---
 
-### Flux d'Authentification :
+### 2.3 Flux d'Authentification :
 Ces diagrammes illustrent les différentes étapes du processus d'authentification selon le type de compte.
 
-#### **1. Création de compte utilisateur :**
+#### **2.3.1 Création de compte utilisateur :**
 - **Vanilla** : L'utilisateur fournit un email et un mot de passe, Keycloak gère la création et stocke les données dans la base de données.
 - **Polytech** : Redirection vers **Polytech LDAP** via **Keycloak** pour validation des identifiants.
 - **Google** : Redirection vers **Google OAuth**, qui renvoie un jeton validé par **Keycloak**.
 
-#### **2. Connexion utilisateur :**
+#### **2.3.2 Connexion utilisateur :**
 - **Vanilla** : L'utilisateur soumet ses identifiants, qui sont validés par **Keycloak**.
 - **Polytech** : Redirection vers **Polytech LDAP**, qui valide et retourne un jeton à **Keycloak**.
 
-#### **3. Association d'un compte Google :**
+#### **2.3.3 Association d'un compte Google :**
 1. L'utilisateur connecté initie une liaison avec son compte Google.
 2. Redirection vers **Google OAuth** pour validation.
 3. Retour du jeton à **Keycloak**.
@@ -126,94 +126,167 @@ Ces éléments garantissent une gestion flexible et sécurisée de l'authentific
 .Diagrammes de Séquence
 image::diagramme/sequence-diagrame-TDA.drawio.png[]
 
-== Communication Inter-Microservices
+== 3. Communication Inter-Microservices
 
-### Stratégie de Communication :
+### 3.1 Stratégie de Communication :
 
 Pour une application de messagerie en temps réel comme Beep, l'architecture doit prioriser la faible latence, la haute disponibilité et la scalabilité.
 
-#### **1. Service d'Authentification:**
+#### **3.1.1 Service d'Authentification:**
 
 **APIs REST/gRPC :** Les APIs REST sont utilisées pour leur simplicité et leur compatibilité avec les navigateurs web, facilitant ainsi l'intégration avec des applications front-end. gRPC est utilisé pour la communication inter-services en raison de sa performance et de sa capacité à gérer des appels de procédure distante de manière efficace.
 
-#### **2. Service de Messages:**
+#### **3.1.2 Service de Messages:**
 
 **gRPC :** gRPC est choisi pour sa performance et sa capacité à gérer des communications bidirectionnelles, ce qui est crucial pour les opérations CRUD sur les messages où la latence doit être minimale.
 
 **Redis :** Redis est utilisé pour le cache afin de réduire la latence des opérations de lecture fréquentes, améliorant ainsi la réactivité de l'application.
 
-#### **3. Service de Présence:**
+#### **3.1.3 Service de Présence:**
 
 **WebSockets :** Les WebSockets permettent une communication bidirectionnelle en temps réel entre le client et le serveur, essentielle pour maintenir l'état de présence des utilisateurs à jour en temps réel.
 
 **Redis Pub/Sub :** Redis Pub/Sub est utilisé pour la diffusion d'états de présence entre les instances du service, assurant que toutes les instances ont une vue cohérente de l'état des utilisateurs.
 
-#### **4. Service de Notifications:**
+#### **3.1.4 Service de Notifications:**
 
 **WebSocket/Push :** Les WebSockets et les notifications push sont utilisés pour envoyer des notifications en temps réel aux utilisateurs, que ce soit sur le web ou sur des appareils mobiles.
 
-#### **5. Service de Médias:**
+#### **3.1.5 Service de Médias:**
 
 **API REST :** Une API REST est utilisée pour les uploads de médias en raison de sa simplicité et de sa compatibilité avec les navigateurs web, facilitant ainsi l'intégration avec les interfaces utilisateur.
 
-**RabbitMQ :** RabbitMQ est utilisé pour le traitement asynchrone des médias, permettant de découpler le traitement des images et des vidéos de l'upload initial, ce qui améliore la réactivité de l'application.
+**Kafka :** kafka est utilisé pour le traitement asynchrone, permettant de découpler le traitement des images et des vidéos de l'upload initial, ce qui améliore la réactivité de l'application.
 
-#### **6. Service de Serveurs/Channel:**
+#### **3.1.6 Service de Serveurs/Channel:**
 
 **gRPC et REST :** gRPC est utilisé pour la communication inter-services en raison de sa performance, tandis que REST est utilisé pour les interactions avec les clients en raison de sa simplicité et de sa compatibilité.
 
-### Diagramme de Séquence :
+### 3.2 Diagramme de Séquence :
 
 Voici le diagramme de séquence résumant les interactions entre les différents microservices lors de l'envoi d'un message par un utilisateur.
 
 .Diagramme de Séquence de Communication
 image::diagramme/sequence-communication-inter-microservice.drawio.png[]
 
-== Système d'Autorisation
+== 4. Système d'Autorisation
 
-### Architecture du Service d'Autorisation :
+### **4.1 Définition du Service d'Autorisation**  
+Un **service d'autorisation** est un module permettant de contrôler l'accès aux ressources de l'application en fonction des rôles et permissions des utilisateurs. Il joue un rôle central dans la sécurité et la gestion des accès.  
+
+#### **Objectifs du Service d'Autorisation :**  
+- Assurer une gestion granulaire des permissions à différents niveaux :  
+  - **Serveur** (ex : propriétaire, modérateur, membre).  
+  - **Catégorie** (ex : accès à certaines sections d'un serveur).  
+  - **Channel** (ex : lecture/écriture des messages, envoi de fichiers).  
+- Permettre l'attribution de **permissions globales** aux administrateurs de la plateforme.  
+- Offrir une **scalabilité** et une **interopérabilité** avec d'autres services via des API sécurisées.  
+
+---
+
+### **4.2 Architecture Fonctionnelle**  
+L'architecture fonctionnelle repose sur un modèle **RBAC (Role-Based Access Control)**, structuré de la manière suivante :  
+
+1. **Gestion des rôles et permissions**  
+   - Rôles définis par serveur (ex : propriétaire, modérateur, membre).  
+   - Permissions assignées aux catégories et channels.  
+   - Gestion des rôles globaux pour les administrateurs de la plateforme.  
+
+2. **Validation des accès**  
+   - Lorsqu'un utilisateur tente d'accéder à une ressource, son rôle et ses permissions sont vérifiés.  
+   - Un refus d'accès est retourné si l'utilisateur n'a pas les droits nécessaires.  
+
+3. **Administration et gestion dynamique**  
+   - Interface permettant aux administrateurs de modifier les rôles et permissions en temps réel.  
+
+
+### **4.3 Architecture Technique**  
+L'implémentation technique repose sur une approche **microservices** avec un **service d'autorisation centralisé**.  
+
+#### **4.3.1 Composants principaux :**  
+- **Service d'authentification (Keycloak)** : Gestion des utilisateurs et rôles via OpenID Connect (OIDC).  
+- **Service d'autorisation** : Vérifie les permissions et applique les règles de contrôle d'accès.  
+- **Base de données des permissions** : Stocke les règles et associations utilisateurs-serveurs-channels.  
+- **Cache (Redis)** : Accélère la vérification des permissions.  
+
+#### **4.3.2 Technologies Recommandées :**  
+- **Base de données** : PostgreSQL
+- **Cache** : Redis
+- **IAM & OIDC** : Keycloak
+- **Communication interservices** : gRPC / REST API
+
+#### **4.3.3 Flux Technique :**  
+1. L'utilisateur effectue une action nécessitant une autorisation.  
+2. Le service d'autorisation interroge la base des permissions ou le cache.  
+3. Une réponse est envoyée au backend avec un **statut d'autorisation (autorisé/refusé)**.  
+
+---
+
+### **4.4 Diagrammes de Séquence**  
+Les diagrammes suivants illustrent le fonctionnement du système dans les cas d'usage principaux.  
+
+#### **4.4.1 Création d'un Serveur et Attribution des Permissions**  
+**Acteurs** : Utilisateur, Backend, Service d'Autorisation, Base de données.  
+1. L'utilisateur crée un serveur via l'interface.  
+2. Le backend contacte le service d'autorisation pour initialiser les permissions.  
+3. Les permissions sont stockées en base et mises en cache.  
+
+#### **4.4.2 Ajout d'un Utilisateur à un Serveur avec un Rôle Spécifique**  
+**Acteurs** : Administrateur du serveur, Backend, Service d'Autorisation.  
+1. L'administrateur attribue un rôle (ex : modérateur) à un utilisateur.  
+2. Le service d'autorisation met à jour les permissions en base et en cache.  
+
+#### **4.4.3 Accès à un Channel avec Vérification des Permissions**  
+**Acteurs** : Utilisateur, Frontend, Backend, Service d'Autorisation.  
+1. L'utilisateur tente d'accéder à un channel.  
+2. Le backend interroge le service d'autorisation pour vérifier les permissions.  
+3. Si autorisé, le contenu du channel est chargé.  
+
+#### **4.4.4 Attribution de Permissions Globales à un Administrateur**  
+**Acteurs** : Super Administrateur, Service d'Autorisation.  
+1. Un super admin élève un utilisateur au rang d'administrateur global.  
+2. Les permissions globales sont mises à jour dans le service d'autorisation.  
+
+#### Architecture du Service d'Autorisation :
 - Gestion des permissions par serveur, catégorie et canal.
 - Permissions globales pour les administrateurs.
 
-### Diagrammes de Séquence :
-- Exemple de contrôle d'accès basé sur les rôles.
+== 5. Journalisation et Traçabilité
 
-== Journalisation et Traçabilité
-
-### Plan d'Observabilité :
+### 5.1 Plan d'Observabilité :
 - Utilisation de la journalisation et de la traçabilité centralisées.
 - Définition des logs de sécurité.
 
-### Diagrammes de Déploiement et de Séquence :
+### 5.2 Diagrammes de Déploiement et de Séquence :
 (À créer sur Draw.io)
 
-== Prêt pour la Production
+== 6. Prêt pour la Production
 
-### Sujets Couverts :
+### 6.1 Sujets Couverts :
 - Sécurité des données et sauvegardes.
 - Observabilité des services.
 - Stratégies de haute disponibilité.
 
-### Diagramme Cible :
+### 6.2 Diagramme Cible :
 (À créer sur Draw.io)
 
-== Sécurité de l'Infrastructure
+== 7. Sécurité de l'Infrastructure
 
-### Authentification Mobile :
+### 7.1 Authentification Mobile :
 - Définition du processus d'authentification mobile.
 
-### Architecture de Sécurité :
+### 7.2 Architecture de Sécurité :
 - Séparation DMZ, cryptographie et protocoles utilisés.
 
-== Moteur de Recherche
+== 8. Moteur de Recherche
 
-### Proposition Fonctionnelle :
+### 8.1 Proposition Fonctionnelle :
 - Mise en place d'une recherche en texte intégral.
 
-### Maquette UI :
+### 8.2 Maquette UI :
 (À créer sur Draw.io)
 
-### Diagramme de Séquence :
+### 8.3 Diagramme de Séquence :
 - Flux de requête de recherche.
 
 == Conclusion
