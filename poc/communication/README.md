@@ -1,18 +1,15 @@
 # POC Communication Inter-Microservices
 
-Ce POC démontre trois types de communication entre microservices :
+Ce POC démontre la communication entre deux microservices via une API REST :
 
-1. REST pour les opérations CRUD basiques
-2. gRPC pour les communications performantes
-3. WebSocket pour la communication en temps réel
+1. **Product Service** (port 3000) : Gère les produits et leur stock
+2. **Order Service** (port 3001) : Gère les commandes et communique avec le service Product
 
 ## Architecture
 
-- **REST Service** (port 3000) : API REST pour les opérations CRUD sur les messages
-- **gRPC Service** (port 50051) : Service gRPC pour les communications performantes
-- **WebSocket Service** (port 8081) : Service WebSocket pour la communication en temps réel
-
-Les services communiquent directement entre eux via des appels HTTP.
+- Le service Order communique avec le service Product via des appels HTTP
+- Les services partagent un réseau Docker pour la communication
+- Chaque service maintient sa propre base de données en mémoire
 
 ## Prérequis
 
@@ -27,64 +24,46 @@ docker-compose up -d
 
 ## Test des Services
 
-### REST Service
+### Product Service
 
 ```bash
-# Récupérer les messages
-curl http://localhost:3000/messages
+# Récupérer tous les produits
+curl http://localhost:3000/products
 
-# Envoyer un message
-curl -X POST http://localhost:3000/messages \
+# Récupérer un produit spécifique
+curl http://localhost:3000/products/1
+
+# Mettre à jour le stock d'un produit
+curl -X PATCH http://localhost:3000/products/1/stock \
   -H "Content-Type: application/json" \
-  -d '{"content": "Hello via REST"}'
+  -d '{"quantity": 2}'
 ```
 
-### gRPC Service
-
-Pour tester le service gRPC, vous pouvez utiliser un client gRPC comme grpcurl :
+### Order Service
 
 ```bash
-# Installer grpcurl
-go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+# Créer une nouvelle commande
+curl -X POST http://localhost:3001/orders \
+  -H "Content-Type: application/json" \
+  -d '{"productId": 1, "quantity": 2}'
 
-# Récupérer les messages
-grpcurl -plaintext localhost:50051 message.MessageService/GetMessages
+# Récupérer toutes les commandes
+curl http://localhost:3001/orders
 
-# Envoyer un message
-grpcurl -plaintext -d '{"content": "Hello via gRPC"}' localhost:50051 message.MessageService/SendMessage
-```
-
-### WebSocket Service
-
-Pour tester le service WebSocket, vous pouvez utiliser un client WebSocket comme wscat :
-
-```bash
-# Installer wscat
-npm install -g wscat
-
-# Se connecter au WebSocket
-wscat -c ws://localhost:8081
-
-# Envoyer un message
-{"content": "Hello via WebSocket"}
+# Récupérer une commande spécifique
+curl http://localhost:3001/orders/1
 ```
 
 ## Communication entre Services
 
-Les services communiquent directement entre eux :
+Le service Order communique avec le service Product de la manière suivante :
 
-- Chaque service maintient son propre stockage en mémoire des messages
-- Lorsqu'un message est créé, le service notifie les autres services via des appels HTTP
-- Le service WebSocket diffuse les messages à tous les clients connectés
+1. Lors de la création d'une commande, le service Order vérifie d'abord le stock disponible via le service Product
+2. Si le stock est suffisant, le service Order met à jour le stock via le service Product
+3. Enfin, le service Order crée la commande localement
 
 ## Arrêt
 
 ```bash
 docker-compose down
-```
-
-Pour supprimer les volumes (données) :
-
-```bash
-docker-compose down -v
 ```

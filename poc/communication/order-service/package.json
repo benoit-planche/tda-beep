@@ -1,7 +1,7 @@
 {
-  "name": "rest-service",
+  "name": "order-service",
   "version": "1.0.0",
-  "description": "REST service for communication POC",
+  "description": "Order service for communication POC",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
