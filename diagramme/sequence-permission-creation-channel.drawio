@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-        <mxGraphModel dx="329" dy="490" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+        <mxGraphModel dx="418" dy="326" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -41,10 +41,7 @@
                         <mxPoint x="3" y="-10" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="gIgCATBuBZRof1xgLh5w-12" value="Redis" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
-                    <mxGeometry x="690" y="40" width="100" height="320" as="geometry"/>
-                </mxCell>
-                <mxCell id="gIgCATBuBZRof1xgLh5w-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.501;exitY=0.278;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                <mxCell id="gIgCATBuBZRof1xgLh5w-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.501;exitY=0.278;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1" target="gIgCATBuBZRof1xgLh5w-13">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="310.1200000000001" y="220.15999999999997" as="sourcePoint"/>
                         <mxPoint x="935.0000000000002" y="220" as="targetPoint"/>
@@ -73,14 +70,14 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="gIgCATBuBZRof1xgLh5w-18" value="Base de données" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
-                    <mxGeometry x="890" y="40" width="100" height="320" as="geometry"/>
+                    <mxGeometry x="690" y="40" width="100" height="320" as="geometry"/>
                 </mxCell>
                 <mxCell id="gIgCATBuBZRof1xgLh5w-13" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="gIgCATBuBZRof1xgLh5w-18" vertex="1">
                     <mxGeometry x="45" y="180" width="10" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="gIgCATBuBZRof1xgLh5w-91" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" parent="1" target="gIgCATBuBZRof1xgLh5w-4" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="942.8" y="280" as="sourcePoint"/>
+                        <mxPoint x="740" y="280" as="sourcePoint"/>
                         <mxPoint x="90.00000000000004" y="280" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>

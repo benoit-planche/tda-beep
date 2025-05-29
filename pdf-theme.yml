@@ -1,0 +1,64 @@
+extends: default
+base:
+  font_size: 13
+  line_height_length: 1.5
+  text_align: left
+  margin: [0.5in, 0.5in, 0.5in, 0.5in]
+# heading:
+#   font_size: 20
+#   font_style: bold
+#   margin_top: 10
+#   margin_bottom: 20
+#   font_color: "#874e95"
+heading:
+  font-color: #2C3E50
+  margin-bottom: 12
+  margin-top: 4
+  text-transform: none
+
+heading-h1:
+  font-size: 32
+  font-color: #4A148C
+  border-bottom-width: 2
+  border-bottom-color: #4A148C
+  border-bottom-style: solid
+  text-transform: uppercase
+  font-weight: bold
+  break-before: page
+  break-after: page
+  text-align: center
+  margin-bottom: 10in
+
+heading-h2:
+  font-size: 24
+  font-color: #6A1B9A
+  border-bottom-width: 1
+  border-bottom-color: #6A1B9A
+  border-bottom-style: solid
+  margin-bottom: 20
+  margin-top: 28
+  font-weight: bold
+
+heading-h3:
+  font-size: 20
+  font-color: #8E24AA
+  margin-bottom: 16
+  margin-top: 24
+  font-style: italic
+  font-weight: bold 
+page:
+  margin: [0.5in, 0.5in, 0.5in, 0.5in]
+  size: A4
+  layout: portrait
+  first_page_number: 1
+  running_content:
+    top:
+      left:
+        content: '{document-title}'
+      right:
+        content: '{page-number}'
+    bottom:
+      left:
+        content: '{chapter-title}'
+      right:
+        content: '{page-number}'

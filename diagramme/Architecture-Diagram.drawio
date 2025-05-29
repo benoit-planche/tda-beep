@@ -15,8 +15,8 @@
             <Array as="points" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-6" value="Authentification &amp; Autorisation Service " style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-170" y="250" width="93" height="54" as="geometry" />
+        <mxCell id="RtkMTZi5ys_rh60nrqda-6" value="Authentification &amp; Gestion des Utilisateurs&#xa;- Inscription, Connexion&#xa;- Gestion des Profils&#xa;- Gestion des rôles" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="250" width="150" height="80" as="geometry" />
         </mxCell>
         <mxCell id="RtkMTZi5ys_rh60nrqda-8" value="" style="startArrow=none;endArrow=none;exitX=1;exitY=0.25;entryX=0;entryY=0.5;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;startFill=0;" edge="1" parent="1" source="3" target="RtkMTZi5ys_rh60nrqda-6">
           <mxGeometry relative="1" as="geometry">
@@ -24,14 +24,14 @@
             <mxPoint x="-234" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-9" value="Cummunication Service" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-77" y="380" width="93" height="54" as="geometry" />
+        <mxCell id="RtkMTZi5ys_rh60nrqda-9" value="Messagerie et Communication&#xa;- Messages texte et vocaux&#xa;- Partage de fichiers&#xa;- Notifications temps réel" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="-77" y="380" width="150" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-10" value="Search Service" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-77" y="523" width="95" height="54" as="geometry" />
+        <mxCell id="RtkMTZi5ys_rh60nrqda-10" value="Recherche &amp; Indexation&#xa;- Moteur de recherche&#xa;- Messages et fichiers" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="-77" y="523" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-11" value="Serveur &amp; Channel Service" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="-170" y="650" width="93" height="54" as="geometry" />
+        <mxCell id="RtkMTZi5ys_rh60nrqda-11" value="Gestion des Serveurs et channels&#xa;- Création et gestion&#xa;- Modération&#xa;- Permissions" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="650" width="150" height="80" as="geometry" />
         </mxCell>
         <mxCell id="RtkMTZi5ys_rh60nrqda-12" value="" style="startArrow=none;endArrow=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;startFill=0;" edge="1" parent="1" source="3" target="RtkMTZi5ys_rh60nrqda-9">
           <mxGeometry relative="1" as="geometry">
@@ -51,19 +51,19 @@
             <mxPoint x="-57" y="427" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-15" value="Authentification &amp;amp; Autorisation database&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-15" value="Base de données&#xa;Utilisateurs" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
           <mxGeometry x="60" y="287" width="60" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-16" value="Cummunication database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-16" value="Base de données&#xa;Messages" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
           <mxGeometry x="150" y="367" width="60" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-17" value="Search database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-17" value="Base de données&#xa;Recherche" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
           <mxGeometry x="150" y="510" width="60" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-18" value="Serveur &amp;amp; Channel database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-18" value="Base de données&#xa;Serveurs" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
           <mxGeometry x="60" y="637" width="60" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-19" value="Keycloak database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-19" value="Keycloak" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
           <mxGeometry x="60" y="190" width="60" height="80" as="geometry" />
         </mxCell>
         <mxCell id="RtkMTZi5ys_rh60nrqda-20" value="" style="startArrow=none;endArrow=none;exitX=1;exitY=0.25;entryX=0;entryY=0.5;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;dashed=1;startFill=0;entryPerimeter=0;" edge="1" parent="1" source="RtkMTZi5ys_rh60nrqda-6" target="RtkMTZi5ys_rh60nrqda-19">
@@ -96,19 +96,19 @@
             <mxPoint x="160" y="560" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-27" value="Rest" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-27" value="REST" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-470" y="450" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-28" value="Rest" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-28" value="REST" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-287" y="337" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-29" value="Rest" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-29" value="REST" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-180" y="380" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-30" value="Rest" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-30" value="REST" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-180" y="520" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="RtkMTZi5ys_rh60nrqda-31" value="Rest" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="RtkMTZi5ys_rh60nrqda-31" value="REST" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-287" y="610" width="60" height="30" as="geometry" />
         </mxCell>
       </root>

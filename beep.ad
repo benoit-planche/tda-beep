@@ -1,7 +1,20 @@
-= Rapport de Migration de Beep vers une Architecture Microservices
+
+= Migration de Beep vers une Architecture Microservices
 :toc:
 :toc-title: Table des Matières
+:pdf-page-size: A4
+:pdf-page-margin: [1in, 1in, 1in, 1in]
+:pdf-font-size: 14
+:pdf-line-height: 1.5
+:pdf-title-align: center
+:pdf-title-color: #874e95
+:pdf-heading-color: #000000
+:pdf-heading-align: center
+:pdf-paragraph-spacing: 0.5em
+:pdf-list-indent: 1em
+:pdf-list-spacing: 0.5em
 
+<<<
 == Introduction
 
 Dans le contexte actuel de transformation numérique, les entreprises sont
@@ -48,6 +61,7 @@ performances, la maintenance et l'évolutivité de l'application.
 Dans ce document nous décrirons donc la migration de notre application,
 Beep, d'une architecture monolithique vers une architecture microservices.
 
+<<<
 == 1. Découpage Fonctionnel et Microservices
 
 ### 1.1 Redéfinition des Fonctionnalités
@@ -105,6 +119,7 @@ Beep, d'une architecture monolithique vers une architecture microservices.
 .Diagramme d'Architecture
 image::diagramme/Architecture-Diagram.drawio.png[]
 
+<<<
 == 2. Authentification avec OIDC
 
 === 2.1 Architecture Globale
@@ -201,6 +216,7 @@ image::diagramme/flux-comunication.drawio.png[]
 .Diagrammes de Séquence
 image::diagramme/sequence-diagrame-TDA.drawio.png[]
 
+<<<
 == 3. Communication Inter-Microservices
 
 === 3.1 Contexte et Enjeux
@@ -298,6 +314,7 @@ excellente performance globale.
 .Diagramme de Séquence de Communication
 image::diagramme/sequence-communication-inter-microservice.drawio.png[]
 
+<<<
 == 4. Système d'Autorisation
 
 === 4.1 Fondements et Objectifs
@@ -397,6 +414,7 @@ Cette architecture robuste et évolutive constitue un fondement solide pour
 la sécurité de notre application, permettant une gestion fine des
 permissions adaptée aux besoins de notre communauté d'utilisateurs.
 
+<<<
 == 5. Journalisation et Traçabilité
 
 === 5.1 Architecture de Journalisation
@@ -518,6 +536,7 @@ Cette infrastructure de journalisation, constamment optimisée et adaptée à
 nos besoins, constitue un atout majeur pour la maintenance et l'évolution de
 notre application.
 
+<<<
 == 6. Prêt pour la Production
 
 === 6.1 Stratégies de Déploiement
@@ -656,6 +675,7 @@ l'application.
 Cette préparation minutieuse est essentielle pour assurer le succès de notre
 service en production et la satisfaction de nos utilisateurs.
 
+<<<
 == 7. Sécurité
 
 ### 7.1 Authentification et Autorisation
@@ -862,6 +882,7 @@ Notre système de sécurité continue d'évoluer pour faire face aux nouvelles
 menaces, assurant ainsi la protection continue de nos utilisateurs et de
 leurs données.
 
+<<<
 == 8. Maintenance et Évolution
 
 === 8.1 Stratégie de Maintenance
@@ -1035,6 +1056,7 @@ L'activation des procédures, la communication, et la coordination des
 équipes sont gérées de manière structurée, permettant une reprise rapide et
 efficace des activités.
 
+<<<
 == 9. Conclusion
 
 La migration de Beep vers une architecture microservices marque un tournant

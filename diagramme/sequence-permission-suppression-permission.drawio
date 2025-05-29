@@ -1,0 +1,118 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.0.16">
+  <diagram name="Page-1" id="f4SzSPc7J2c5tdd1Q7-J">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-5" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Admin&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-6" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Frontend&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-7" value="&lt;font style=&quot;font-size: 23px;&quot;&gt;API Gateway&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-8" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Server Service&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Delete Permission Request -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-22" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="280" as="sourcePoint" />
+            <mxPoint x="340" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-24" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Delete Permission Request&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-22">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Forward to Server Service -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-26" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="340" as="sourcePoint" />
+            <mxPoint x="580" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-27" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Forward to Server Service&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-26">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Check Admin Permissions -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-30" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="400" as="sourcePoint" />
+            <mxPoint x="820" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-31" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Check Admin Permissions&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-30">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Delete Permission -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-32" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="460" as="sourcePoint" />
+            <mxPoint x="820" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-33" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Delete Permission&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-32">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Permission Deleted -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-34" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="580" as="sourcePoint" />
+            <mxPoint x="580" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-35" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Permission Deleted&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-34">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Update Cache -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-36" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="640" as="sourcePoint" />
+            <mxPoint x="340" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-37" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Update Cache&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-36">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Notify Members -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-38" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="700" as="sourcePoint" />
+            <mxPoint x="100" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-39" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Notify Members&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-38">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Response to Admin -->
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-40" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="760" as="sourcePoint" />
+            <mxPoint x="100" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QMyI6lvO8tOyy5A7zQMX-41" value="&lt;div&gt;&lt;span style=&quot;font-size: 20px;&quot;&gt;Success/Error&lt;/span&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="QMyI6lvO8tOyy5A7zQMX-40">
+          <mxGeometry x="-0.0028" relative="1" as="geometry">
+            <mxPoint y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile> 
