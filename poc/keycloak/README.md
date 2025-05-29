@@ -22,15 +22,15 @@ POSTGRES_PASSWORD=password
 
 1. Lancez les services :
 
-```bash
-docker-compose up -d
-```
+    ```bash
+    docker-compose up -d
+    ```
 
 2. Accédez à la console d'administration Keycloak :
 
-- URL : <http://localhost:8080>
-- Username : admin
-- Password : admin
+    - URL : <http://localhost:8080>
+    - Username : admin
+    - Password : admin
 
 ## Configuration du Realm
 
